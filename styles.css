@@ -40,7 +40,7 @@ body {
 .message {
   animation: fadeIn 1s ease-out forwards;
   color: #333;
-  font-size: 3rem;
+  font-size: 2rem;
   margin: 1rem 0;
   opacity: 0;
   transform: translateY(20px);
@@ -59,7 +59,7 @@ body {
   border-radius: 50px;
   color: white;
   cursor: pointer;
-  font-size: 2.5rem;
+  font-size: 1.1rem;
   padding: 1rem 2rem;
   transition: transform 0.3s, background 0.3s;
 }
@@ -178,7 +178,7 @@ body {
 .modal-content {
   background: white;
   border-radius: 10px;
-  font-size: 3rem;
+  font-size: 24px;
   font-weight: bold;
   max-width: 1000px;
   padding: 64px;
@@ -188,7 +188,7 @@ body {
 
 .close {
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 20px;
   position: absolute;
   right: 15px;
   top: 10px;
