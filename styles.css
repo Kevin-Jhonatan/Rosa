@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background: linear-gradient(135deg, #e3105d 0%, #eb81d5 100%);
+  display: flex;
+  font-family: "Lucida Handwriting", cursive;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  overflow: hidden;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+  width: 90%;
+}
+
+.heart-container {
+  margin: 2rem 0;
+  position: relative;
+}
+
+.heart {
+  animation: pulse 1.5s ease-in-out infinite;
+  fill: #ed283c;
+  transform-origin: center;
+}
+
+.message {
+  animation: fadeIn 1s ease-out forwards;
+  color: #333;
+  font-size: 2rem;
+  margin: 1rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.btn-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.btn {
+  background: #ed283c;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.btn:hover {
+  background: #ff3356;
+  transform: scale(1.05);
+}
+
+.btn.no {
+  background: #161617;
+}
+
+.btn.no:hover {
+  background: #555;
+}
+
+.floating-hearts {
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.question {
+  display: none;
+}
+
+.question.active {
+  display: block;
+}
+
+.no-btn-container {
+  position: relative;
+}
+
+.no-btn-container .btn.no {
+  position: relative;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+@keyframes dodge {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sparkle {
+  animation: sparkle 1s ease-in-out infinite;
+  fill: #eb59d0;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.broken-heart {
+  display: none;
+  fill: #161617;
+}
+.modal {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  max-width: 1000px;
+  padding: 64px;
+  position: relative;
+  text-align: center;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}

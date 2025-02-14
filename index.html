@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Rosa 💖</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="heart-container">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <path
+            class="heart"
+            d="M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 34.2 0L50 20.5l-0.9 0.9c9.5-9.5 24.7-9.5 34.2 0s9.5 24.7 0 34.2L50 88.9z"
+          />
+        </svg>
+      </div>
+
+      <div class="question active" id="q1">
+        <h1 class="message">
+          Rosa, ¿aceptas ser mi Ruth en este camino de amor y fe? 💝
+        </h1>
+        <div class="btn-container">
+          <button
+            class="btn"
+            onclick="nextQuestion(true, 1, 'Donde tú vayas, yo iré, y donde tú vivas, yo viviré. Tu pueblo será mi pueblo, y tu Dios será mi Dios. - Rut 1:16', 'Porque contigo, Rosa, hasta los desiertos florecen. 🌹')"
+          >
+            Yes!
+          </button>
+          <button
+            class="btn no"
+            onclick="handleNo(1, '¿En serio, Rosa? 😱 ¿Me estás diciendo que no? ¡Ni el mar Rojo se atrevió a ser tan difícil de cruzar! 🙈 (Vuelve a intentarlo, no seas malvada 😏).')"
+            onmouseover="dodgeNo(this)"
+          >
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="question" id="q2">
+        <h1 class="message">
+          Rosa, ¿me das el honor de caminar juntos, como los dicipulos de Jesús?
+          🌹
+        </h1>
+        <div class="btn-container">
+          <button
+            class="btn"
+            onclick="nextQuestion(true, 2, 'Donde dos o tres se reúnen en mi nombre, allí estoy yo en medio de ellos. - Mateo 18:20', 'Contigo, cada paso es una bendición. 🥰')"
+          >
+            Yes!
+          </button>
+          <button
+            class="btn no"
+            onclick="handleNo(2, '¿Qué? 😳 ¿En serio dijiste que no? ¡Hasta Jonás se arrepintió de decirle que no a Dios! 🙃 (Dale otra oportunidad a este pobre enamorado 😌).')"
+            onmouseover="dodgeNo(this)"
+          >
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="question" id="q3">
+        <h1 class="message">
+          Rosa, Ahora mismo quiero darte un abrazo pero no estas aquí 🤗
+        </h1>
+        <div class="btn-container">
+          <button
+            class="btn"
+            onclick="nextQuestion(true, 3, 'El amor es paciente, es bondadoso. El amor no tiene envidia, no se jacta, no se envanece. - 1 Corintios 13:4', 'Porque contigo, Rosa, hasta los abrazos saben a cielo. ❤️')"
+          >
+            Yes!
+          </button>
+          <button
+            class="btn no"
+            onclick="handleNo(3, '¿Qué? 😤 ¿Ni un abrazo? ¡Hasta el hijo pródigo recibió un abrazo! 😅 (No seas dura, Rosa, dale clic al sí 😘).')"
+            onmouseover="dodgeNo(this)"
+          >
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="question" id="final">
+        <h1 class="message">
+          Rosa, eres mi regalo de Dios, y siempre recordaré que el amor viene de
+          Él. Te Quiero. ❤️
+        </h1>
+        <div class="btn-container">
+          <button
+            class="btn"
+            onclick="nextQuestion(true, 3, 'final', 'El amor nunca deja de ser. - 1 Corintios 13:8', 'Porque contigo, Rosa, hasta el cielo envidia nuestro amor. 🌟❤️')"
+          >
+            Yes!
+          </button>
+          <button
+            class="btn no"
+            onclick="handleNo('final', '¿Otra vez no? 😭 ¡Hasta Faraón dejó ir al pueblo de Israel! 😤 (Rosa, no seas cruel, dale clic al sí, por favor 🥺).')"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="customModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
