@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prep Académica - Rosa 📚</title>
+  <link rel="stylesheet" href="study.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="top-menu">
+    <a href="index.html">❤️ Rosa</a>
+    <a href="study.html" class="active">📚 Estudio</a>
+  </nav>
+
+  <main class="container">
+    <div class="glass-card main-card">
+      <header class="quiz-header">
+        <div class="progress-container">
+          <span id="progress-text">Pregunta 0 de 0</span>
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+        <div class="stats">
+          <span id="score">Puntos: 0</span>
+        </div>
+      </header>
+
+      <section class="content-split">
+        <!-- Reading Section -->
+        <aside class="reading-section" id="reading-section">
+          <div class="reading-header">
+            <h3 id="reading-title">Cargando lectura...</h3>
+            <button id="toggle-reading" class="icon-btn" title="Expandir/Contraer">📖</button>
+          </div>
+          <div class="reading-content" id="reading-text">
+            <!-- Text injected by JS -->
+          </div>
+        </aside>
+
+        <!-- Question Section -->
+        <article class="question-section">
+          <h2 id="question-text">Cargando pregunta...</h2>
+          <div class="options-grid" id="options-container">
+            <!-- Options injected by JS -->
+          </div>
+
+          <div class="action-area">
+            <p id="feedback-msg" class="feedback"></p>
+            <button id="next-btn" class="btn primary" style="display: none;">Siguiente Pregunta</button>
+            <button id="view-sustento" class="btn secondary" style="display: none;">Ver Sustento</button>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal for Sustento -->
+  <div id="sustento-modal" class="modal">
+    <div class="modal-content glass-card">
+      <span class="close-btn">&times;</span>
+      <h3>Justificación Técnica</h3>
+      <div class="sustento-body" id="sustento-text">
+        <!-- Sustento content -->
+      </div>
+      <button class="btn primary btn-full" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script src="questions_data.js"></script>
+  <script src="study.js"></script>
+</body>
+
+</html>
