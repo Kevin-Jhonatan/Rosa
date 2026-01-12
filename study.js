@@ -17,14 +17,26 @@ const nextBtn = document.getElementById('next-btn');
 const sustentoBtn = document.getElementById('view-sustento');
 const sustentoModal = document.getElementById('sustento-modal');
 const sustentoText = document.getElementById('sustento-text');
+const componentBadge = document.getElementById('component-badge');
+const readingSection = document.getElementById('reading-section');
+const toggleReadingBtn = document.getElementById('toggle-reading');
 
 // Initialize
 function initQuiz() {
+  setupToggleReading();
   loadContent();
 }
 
 let currentOptions = [];
 let correctAnswerText = "";
+
+function setupToggleReading() {
+  toggleReadingBtn.addEventListener('click', () => {
+    readingSection.classList.toggle('collapsed');
+    const icon = document.getElementById('toggle-icon');
+    icon.textContent = readingSection.classList.contains('collapsed') ? '📄' : '📖';
+  });
+}
 
 function loadContent() {
   const textData = questionsData[currentTextIdx];
@@ -37,6 +49,9 @@ function loadContent() {
   nextBtn.style.display = "none";
   sustentoBtn.style.display = "none";
 
+  // Update Component Badge
+  componentBadge.textContent = textData.component;
+  
   // Update Reading
   readingTitle.textContent = textData.title;
   readingText.innerHTML = textData.fullText || textData.text;
@@ -52,9 +67,26 @@ function loadContent() {
   renderOptions(currentOptions);
 
   // Update Progress
-  const totalQuestions = textData.questions.length;
-  progressText.textContent = `Pregunta ${currentQuestIdx + 1} de ${totalQuestions}`;
-  progressFill.style.width = `${((currentQuestIdx + 1) / totalQuestions) * 100}%`;
+  const totalQuestions = getTotalQuestions();
+  const currentQuestionNum = getCurrentQuestionNum();
+  progressText.textContent = `Pregunta ${currentQuestionNum} de ${totalQuestions}`;
+  progressFill.style.width = `${(currentQuestionNum / totalQuestions) * 100}%`;
+}
+
+function getTotalQuestions() {
+  let total = 0;
+  questionsData.forEach(text => {
+    total += text.questions.length;
+  });
+  return total;
+}
+
+function getCurrentQuestionNum() {
+  let num = 0;
+  for (let i = 0; i < currentTextIdx; i++) {
+    num += questionsData[i].questions.length;
+  }
+  return num + currentQuestIdx + 1;
 }
 
 function shuffleArray(array) {
@@ -101,6 +133,9 @@ function handleCorrect(btn) {
   scoreEl.textContent = `Puntos: ${score}`;
 
   showNextButton();
+  
+  // Show sustento button even on correct answer
+  sustentoBtn.style.display = "inline-block";
 }
 
 function handleWrong(btn) {
@@ -108,26 +143,40 @@ function handleWrong(btn) {
   btn.classList.add('wrong');
   btn.disabled = true; // Disable this specific wrong option
 
-  feedbackMsg.textContent = "❌ Intenta de nuevo";
-  feedbackMsg.style.color = "var(--error)";
-
   if (attempts >= 2) {
     isAnswered = true;
-    feedbackMsg.textContent = "Has fallado 2 veces. Mira el sustento.";
-    sustentoBtn.style.display = "block";
-    showNextButton();
-
-    // Highlight correct answer
+    feedbackMsg.textContent = "❌ Has fallado 2 veces. Se muestra la respuesta correcta.";
+    feedbackMsg.style.color = "var(--error)";
+    
+    // Show correct answer automatically
     document.querySelectorAll('.option-btn').forEach(b => {
       if (b.textContent === correctAnswerText) {
         b.classList.add('correct');
+        b.disabled = false; // Ensure it's clickable for feedback
       }
     });
+
+    // Automatically show sustento after 2 errors
+    setTimeout(() => {
+      showSustento();
+    }, 500);
+    
+    showNextButton();
+    sustentoBtn.style.display = "inline-block";
+  } else {
+    feedbackMsg.textContent = `❌ Incorrecto. Intentos: ${attempts}/2`;
+    feedbackMsg.style.color = "var(--error)";
   }
 }
 
 function showNextButton() {
   nextBtn.style.display = "block";
+}
+
+function showSustento() {
+  const questionData = questionsData[currentTextIdx].questions[currentQuestIdx];
+  sustentoText.textContent = questionData.explanation;
+  sustentoModal.style.display = "flex";
 }
 
 nextBtn.onclick = () => {
@@ -151,19 +200,17 @@ nextBtn.onclick = () => {
 
 function finishQuiz() {
   document.querySelector('.container').innerHTML = `
-        <div class="glass-card main-card" style="text-align: center; justify-content: center;">
-            <h1>🎊 ¡Estudio Completado!</h1>
-            <p style="font-size: 1.5rem; margin: 2rem 0;">Tu puntaje final es: <strong>${score}</strong></p>
-            <button class="btn primary" onclick="location.reload()">Reiniciar</button>
+        <div class="glass-card main-card finish-screen" style="text-align: center; padding: 3rem 2rem;">
+            <h1 style="font-size: 2rem; margin-bottom: 1.5rem;">🎊 ¡Estudio Completado!</h1>
+            <p style="font-size: 1.5rem; margin: 2rem 0;">Tu puntaje final es: <strong style="color: var(--primary); font-size: 2rem;">${score}</strong></p>
+            <button class="btn primary" onclick="location.reload()" style="margin-top: 1rem;">Reiniciar</button>
         </div>
     `;
 }
 
 // Sustento Modal Logic
 sustentoBtn.onclick = () => {
-  const questionData = questionsData[currentTextIdx].questions[currentQuestIdx];
-  sustentoText.textContent = questionData.explanation;
-  sustentoModal.style.display = "flex";
+  showSustento();
 };
 
 function closeModal() {
@@ -178,5 +225,18 @@ window.onclick = (event) => {
   }
 };
 
-// Start the app
-initQuiz();
+// Verify questionsData is loaded
+if (typeof questionsData === 'undefined' || !questionsData || questionsData.length === 0) {
+  console.error('Error: questionsData no está definido o está vacío');
+  document.querySelector('.container').innerHTML = `
+    <div class="glass-card main-card" style="text-align: center; padding: 3rem 2rem;">
+      <h1 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--error);">❌ Error</h1>
+      <p style="font-size: 1rem; margin-bottom: 1rem;">No se pudo cargar las preguntas.</p>
+      <p style="font-size: 0.9rem; color: var(--text-secondary);">Verifica que el archivo questions_data.js esté cargado correctamente.</p>
+      <button class="btn primary" onclick="location.reload()" style="margin-top: 1rem;">Recargar</button>
+    </div>
+  `;
+} else {
+  // Start the app
+  initQuiz();
+}

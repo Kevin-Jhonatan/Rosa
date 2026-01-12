@@ -1,119 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Para Rosa 💖</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <nav class="top-menu">
-      <a href="index.html">❤️ Rosa</a>
-      <a href="study.html">📚 Estudio</a>
-    </nav>
 
-    <div class="card">
-      <div class="heart-container">
-        <svg viewBox="0 0 100 100" width="100" height="100">
-          <path
-            class="heart"
-            d="M50 88.9L16.7 55.6C7.2 46.1 7.2 30.9 16.7 21.4s24.7-9.5 34.2 0L50 20.5l-0.9 0.9c9.5-9.5 24.7-9.5 34.2 0s9.5 24.7 0 34.2L50 88.9z"
-          />
-        </svg>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudio - Prep Académica 📚</title>
+  <link rel="stylesheet" href="study.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
 
-      <div class="question active" id="q1">
-        <h1 class="message">
-          Rosa, ¿aceptas ser mi Ruth en este camino de amor y fe? 💝
-        </h1>
-        <div class="btn-container">
-          <button
-            class="btn"
-            onclick="nextQuestion(true, 1, 'Donde tú vayas, yo iré, y donde tú vivas, yo viviré. Tu pueblo será mi pueblo, y tu Dios será mi Dios. - Rut 1:16', 'Porque contigo, Rosa, hasta los desiertos florecen. 🌹')"
-          >
-            Yes!
-          </button>
-          <button
-            class="btn no"
-            onclick="handleNo(1, '¿En serio, Rosa? 😱 ¿Me estás diciendo que no? ¡Ni el mar Rojo se atrevió a ser tan difícil de cruzar! 🙈 (Vuelve a intentarlo, no seas malvada 😏).')"
-            onmouseover="dodgeNo(this)"
-          >
-            No
-          </button>
+<body>
+  <nav class="top-menu">
+    <a href="index.html" class="active">📚 Estudio</a>
+  </nav>
+
+  <main class="container">
+    <div class="glass-card main-card">
+      <header class="quiz-header">
+        <div class="progress-container">
+          <span id="progress-text">Pregunta 0 de 0</span>
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
         </div>
-      </div>
-
-      <div class="question" id="q2">
-        <h1 class="message">
-          Rosa, ¿me das el honor de caminar juntos, como los dicipulos de Jesús?
-          🌹
-        </h1>
-        <div class="btn-container">
-          <button
-            class="btn"
-            onclick="nextQuestion(true, 2, 'Donde dos o tres se reúnen en mi nombre, allí estoy yo en medio de ellos. - Mateo 18:20', 'Contigo, cada paso es una bendición. 🥰')"
-          >
-            Yes!
-          </button>
-          <button
-            class="btn no"
-            onclick="handleNo(2, '¿Qué? 😳 ¿En serio dijiste que no? ¡Hasta Jonás se arrepintió de decirle que no a Dios! 🙃 (Dale otra oportunidad a este pobre enamorado 😌).')"
-            onmouseover="dodgeNo(this)"
-          >
-            No
-          </button>
+        <div class="stats">
+          <span id="score">Puntos: 0</span>
         </div>
-      </div>
+      </header>
 
-      <div class="question" id="q3">
-        <h1 class="message">
-          Rosa, Ahora mismo quiero darte un abrazo pero no estas aquí 🤗
-        </h1>
-        <div class="btn-container">
-          <button
-            class="btn"
-            onclick="nextQuestion(true, 3, 'El amor es paciente, es bondadoso. El amor no tiene envidia, no se jacta, no se envanece. - 1 Corintios 13:4', 'Porque contigo, Rosa, hasta los abrazos saben a cielo. ❤️')"
-          >
-            Yes!
-          </button>
-          <button
-            class="btn no"
-            onclick="handleNo(3, '¿Qué? 😤 ¿Ni un abrazo? ¡Hasta el hijo pródigo recibió un abrazo! 😅 (No seas dura, Rosa, dale clic al sí 😘).')"
-            onmouseover="dodgeNo(this)"
-          >
-            No
-          </button>
-        </div>
-      </div>
+      <section class="content-split">
+        <!-- Reading Section -->
+        <aside class="reading-section" id="reading-section">
+          <div class="reading-header">
+            <h3 id="reading-title">Cargando lectura...</h3>
+            <button id="toggle-reading" class="icon-btn" title="Expandir/Contraer" aria-label="Toggle lectura">
+              <span id="toggle-icon">📖</span>
+            </button>
+          </div>
+          <div class="reading-content" id="reading-text">
+            <!-- Text injected by JS -->
+          </div>
+        </aside>
 
-      <div class="question" id="final">
-        <h1 class="message">
-          Rosa, eres mi regalo de Dios, y siempre recordaré que el amor viene de
-          Él. Te Quiero. ❤️
-        </h1>
-        <div class="btn-container">
-          <button
-            class="btn"
-            onclick="nextQuestion(true, 3, 'final', 'El amor nunca deja de ser. - 1 Corintios 13:8', 'Porque contigo, Rosa, hasta el cielo envidia nuestro amor. 🌟❤️')"
-          >
-            Yes!
-          </button>
-          <button
-            class="btn no"
-            onclick="handleNo('final', '¿Otra vez no? 😭 ¡Hasta Faraón dejó ir al pueblo de Israel! 😤 (Rosa, no seas cruel, dale clic al sí, por favor 🥺).')"
-          >
-            No
-          </button>
-        </div>
-      </div>
+        <!-- Question Section -->
+        <article class="question-section">
+          <div class="component-badge" id="component-badge"></div>
+          <h2 id="question-text">Cargando pregunta...</h2>
+          <div class="options-grid" id="options-container">
+            <!-- Options injected by JS -->
+          </div>
+
+          <div class="action-area">
+            <p id="feedback-msg" class="feedback"></p>
+            <div class="buttons-group">
+              <button id="view-sustento" class="btn secondary" style="display: none;">Ver Sustento</button>
+              <button id="next-btn" class="btn primary" style="display: none;">Siguiente Pregunta</button>
+            </div>
+          </div>
+        </article>
+      </section>
     </div>
-    <div id="customModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p id="modalMessage"></p>
-      </div>
-    </div>
+  </main>
 
-    <script src="script.js"></script>
-  </body>
+  <!-- Modal for Sustento -->
+  <div id="sustento-modal" class="modal">
+    <div class="modal-content glass-card">
+      <span class="close-btn">&times;</span>
+      <h3>Justificación Técnica</h3>
+      <div class="sustento-body" id="sustento-text">
+        <!-- Sustento content -->
+      </div>
+      <button class="btn primary btn-full" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script src="questions_data.js"></script>
+  <script src="study.js"></script>
+</body>
+
 </html>
